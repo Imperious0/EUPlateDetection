@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -211,6 +212,18 @@ public class MainController {
 									}else 
 									{
 										System.err.println("Ad: " + result.getString("ad") + " Soyad: " + result.getString("soyad") + " Plaka: " + result.getString("plaka") + " Araç Tipi: " + result.getString("aracTip"));
+										
+										sqlquery = "UPDATE araclar SET sonKayitTarihi = ? WHERE id = ?";
+										query = connection.prepareStatement(sqlquery);
+										java.util.Date dt = new java.util.Date();
+
+										java.text.SimpleDateFormat sdf = 
+										     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+										String currentTime = sdf.format(dt);
+										query.setString(1, currentTime);
+										query.setInt(2, result.getInt("id"));
+										query.executeUpdate();
 									}
 									plateList.remove(0);
 									
@@ -303,13 +316,14 @@ public class MainController {
 						  Imgproc.rectangle(blurredImage, new Point(plates[i].x, plates[i].y), new Point(plates[i].x + plates[i].width, plates[i].y + plates[i].height), new Scalar(0, 255,0));
 						  this.updateImageView(this.blurredImage, StackImage.mat2Image(blurredImage));
 						  PixelReader reader = StackImage.mat2Image(thresholdImage).getPixelReader();
-						  WritableImage newImage = new WritableImage(reader, plates[i].x, plates[i].y, plates[i].width, plates[i].height);
+						  WritableImage newImage = new WritableImage(reader, plates[i].x + 10, plates[i].y, plates[i].width-10, plates[i].height);
 						  this.updateImageView(this.cascadeImage, newImage);
 						  try 
 						  {
 							  BufferedImage blurredBuf = SwingFXUtils.fromFXImage(this.cascadeImage.getImage(), null);
-							  tes.setLanguage("tur");
+							  //tes.setLanguage("tur");
 							  String res = tes.doOCR(blurredBuf);
+							  res = res.replaceAll("[^\\p{L}\\p{Nd}]+", "");
 							  this.plateList.add(res.replaceAll("\\s", ""));
 						  }catch(TesseractException ex) 
 						  {
