@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem fx:id="openFile" disable="true" mnemonicParsing="false" onAction="#selectFile" onMenuValidation="#selectFile" text="Open…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane fx:id="mainPanel" disable="true" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="364.0" layoutY="77.0" style="&#10;" text="ImageProcess Ver.1" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <ImageView fx:id="grayScaleImage" fitHeight="150.0" fitWidth="200.0" layoutX="226.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="thresHoldImage" fitHeight="150.0" fitWidth="200.0" layoutX="226.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="startCam" layoutX="399.0" layoutY="135.0" mnemonicParsing="false" onAction="#startCamera" text="Start Camera" />
+            <ImageView fx:id="mainImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="blurredImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="dalitionErosionImage" fitHeight="150.0" fitWidth="200.0" layoutX="484.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="cannyImage" fitHeight="150.0" fitWidth="200.0" layoutX="484.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="cascadeImage" fitHeight="150.0" fitWidth="200.0" layoutX="590.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
